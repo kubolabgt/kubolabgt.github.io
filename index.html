@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kubo Lab | Impresión 3D, chatbots de WhatsApp y páginas web en Guatemala</title>
+<meta name="description" content="Piezas en impresión 3D a la medida, asistentes de WhatsApp con inteligencia artificial y páginas web para negocios en Guatemala.">
+<meta property="og:title" content="Kubo Lab — Lo armamos por ti">
+<meta property="og:description" content="Impresión 3D, chatbots de WhatsApp con IA y páginas web en Guatemala.">
+<meta property="og:image" content="https://kubolabgt.github.io/assets/soporte.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><polygon points='50,10 85,30 50,50 15,30' fill='%235EEAD4'/><polygon points='15,30 50,50 50,90 15,70' fill='%2314B8A6'/><polygon points='50,50 85,30 85,70 50,90' fill='%230F766E'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E1A2B; --panel:#16263D; --linea:#24384F;
+    --t1:#5EEAD4; --t2:#14B8A6; --t3:#0F766E; --ambar:#F5A524;
+    --papel:#F3F6F9; --tinta:#1B2635; --gris:#5B6B7F; --gris-claro:#B0BECD;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;font-family:"Poppins",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--tinta);background:var(--papel);line-height:1.6;font-size:17px}
+  a{color:inherit}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--ambar);outline-offset:3px;border-radius:6px}
+  .envoltura{max-width:1160px;margin:0 auto;padding:0 24px}
+
+  /* Capas: el motivo del cubo impreso, usado como divisor entre secciones */
+  .capas{height:18px;background:
+    linear-gradient(var(--t1),var(--t1)) 0 0/100% 4px no-repeat,
+    linear-gradient(var(--t2),var(--t2)) 0 7px/100% 4px no-repeat,
+    linear-gradient(var(--t3),var(--t3)) 0 14px/100% 4px no-repeat;}
+
+  /* Encabezado */
+  header{background:var(--navy);color:#fff;position:sticky;top:0;z-index:10}
+  .barra{display:flex;align-items:center;gap:28px;height:68px}
+  .marca{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:22px;letter-spacing:-.01em}
+  .marca span{color:var(--t1);font-weight:500}
+  nav{display:flex;gap:24px;margin-left:auto;font-size:15px}
+  nav a{text-decoration:none;opacity:.85}
+  nav a:hover{opacity:1}
+  .boton{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;border:2px solid transparent}
+  .boton-ambar{background:var(--ambar);color:var(--navy)}
+  .boton-ambar:hover{background:#ffb83f}
+  .boton-borde{border-color:var(--linea);color:#fff}
+  .boton-borde:hover{border-color:var(--t2)}
+  @media (max-width:760px){nav{display:none}.barra .boton{margin-left:auto;padding:10px 14px}.solo-escritorio{display:none}}
+
+  /* Portada: el chat real es la protagonista */
+  .portada{background:var(--navy);color:#fff;padding:72px 0 88px}
+  .portada .envoltura{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:56px;align-items:center}
+  .portada h1{text-wrap:balance;font-size:clamp(44px,5.6vw,70px);line-height:1.02;letter-spacing:-.035em;margin:0 0 22px;font-weight:700}
+  .portada .bajada{font-size:19px;color:var(--gris-claro);max-width:30ch;margin:0 0 34px}
+  .acciones{display:flex;flex-wrap:wrap;gap:12px}
+  .chat-marco{position:relative}
+  .chat-marco [data-chat-widget]{height:540px;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.45);border:1px solid var(--linea)}
+  .chat-nota{margin:16px 4px 0;font-size:14px;color:var(--gris-claro)}
+  .chat-nota b{color:var(--t1);font-weight:600}
+  @media (max-width:960px){.portada .envoltura{grid-template-columns:minmax(0,1fr)}.chat-marco [data-chat-widget]{height:500px}}
+
+  section{padding:88px 0}
+  h2{font-size:clamp(32px,4vw,46px);line-height:1.1;letter-spacing:-.025em;margin:0 0 14px}
+  .intro{color:var(--gris);max-width:56ch;margin:0 0 48px;font-size:18px}
+
+  /* Servicios: tres líneas de trabajo, cada una con su capa de color */
+  .servicios{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+  .servicio{border-top:4px solid var(--t2);padding-top:22px}
+  .servicio:nth-child(2){border-color:var(--ambar)}
+  .servicio:nth-child(3){border-color:var(--t1)}
+  .servicio h3{font-size:22px;margin:0 0 10px;letter-spacing:-.01em}
+  .servicio p{margin:0 0 14px;color:var(--gris)}
+  .servicio ul{margin:0;padding-left:18px;color:var(--tinta)}
+  .servicio li{margin:4px 0}
+  @media (max-width:860px){.servicios{grid-template-columns:1fr}}
+
+  /* Trabajos */
+  .trabajos{background:#fff}
+  .caso{display:grid;grid-template-columns:420px 1fr;gap:56px;align-items:center;margin-bottom:80px}
+  .caso:last-child{margin-bottom:0}
+  .caso img{width:100%;height:auto;border-radius:18px;display:block}
+  .caso .etiqueta{color:var(--t3);font-weight:600;font-size:15px;margin:0 0 6px}
+  .caso h3{font-size:30px;line-height:1.15;letter-spacing:-.02em;margin:0 0 14px}
+  .caso p{color:var(--gris);margin:0 0 18px;max-width:58ch}
+  .datos{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 28px;margin:0;padding:0;list-style:none}
+  .datos li{border-left:3px solid var(--t2);padding-left:14px}
+  .datos b{display:block;font-size:16px}
+  .datos span{color:var(--gris);font-size:15px}
+  .conversacion{background:var(--navy);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:10px}
+  .burbuja{max-width:85%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.45}
+  .burbuja.cliente{align-self:flex-end;background:var(--t2);color:#06231f;border-bottom-right-radius:4px}
+  .burbuja.bot{align-self:flex-start;background:var(--panel);color:#fff;border-bottom-left-radius:4px}
+  @media (max-width:860px){.caso{grid-template-columns:1fr;gap:28px}.caso.invertido .conversacion{order:-1}}
+
+  /* Cómo trabajamos: es una secuencia real, por eso va numerada */
+  .pasos{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;counter-reset:paso;margin:0;padding:0;list-style:none}
+  .pasos li{counter-increment:paso;position:relative;padding-top:64px}
+  .pasos li::before{content:counter(paso);position:absolute;top:0;left:0;width:46px;height:46px;border-radius:50%;background:var(--navy);color:var(--t1);display:grid;place-items:center;font-weight:700;font-size:20px}
+  .pasos h3{margin:0 0 8px;font-size:20px}
+  .pasos p{margin:0;color:var(--gris)}
+  @media (max-width:860px){.pasos{grid-template-columns:1fr}}
+
+  /* Precios */
+  .precios{background:var(--navy);color:#fff}
+  .precios .intro{color:var(--gris-claro)}
+  .tablas{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+  .tabla h3{font-size:20px;margin:0 0 14px;color:var(--t1)}
+  .tabla table{width:100%;border-collapse:collapse;font-size:16px}
+  .tabla td{padding:16px 0;border-bottom:1px solid var(--linea);vertical-align:top}
+  .tabla td:last-child{text-align:right;font-weight:600;white-space:nowrap;padding-left:16px}
+  .tabla small{display:block;color:var(--gris-claro);font-size:14px;font-weight:400}
+  .nota-precios{margin:28px 0 0;color:var(--gris-claro);font-size:15px;max-width:70ch}
+  @media (max-width:860px){.tablas{grid-template-columns:1fr}}
+
+  /* Contacto */
+  .contacto{text-align:center}
+  .contacto h2{max-width:20ch;margin:0 auto 14px}
+  .contacto .intro{margin:0 auto 32px}
+  .canales{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+  .boton-navy{background:var(--navy);color:#fff}
+  .boton-navy:hover{background:var(--panel)}
+  .boton-claro{border-color:#CBD5E1;color:var(--tinta)}
+  .boton-claro:hover{border-color:var(--t2)}
+
+  footer{background:var(--navy);color:var(--gris-claro);font-size:14px;padding:32px 0}
+  footer .envoltura{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center}
+  footer a{text-decoration:none}
+  footer a:hover{color:#fff}
+  footer .derecha{margin-left:auto;display:flex;gap:20px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="envoltura barra">
+    <a class="marca" href="#inicio" aria-label="Kubo Lab, inicio">
+      <svg width="30" height="30" viewBox="0 0 100 100" aria-hidden="true"><polygon points="50,10 85,30 50,50 15,30" fill="#5EEAD4"/><polygon points="15,30 50,50 50,90 15,70" fill="#14B8A6"/><polygon points="50,50 85,30 85,70 50,90" fill="#0F766E"/><circle cx="86" cy="16" r="10" fill="#F5A524"/></svg>
+      kubo <span>lab</span>
+    </a>
+    <nav aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#precios">Precios</a>
+    </nav>
+    <a class="boton boton-ambar" href="https://wa.me/50247465109" target="_blank" rel="noopener"><span class="solo-escritorio">Escribir por&nbsp;</span>WhatsApp</a>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="portada">
+    <div class="envoltura">
+      <div>
+        <h1>Lo armamos por ti.</h1>
+        <p class="bajada">Piezas en impresión 3D a la medida, asistentes de WhatsApp con inteligencia artificial y páginas web para negocios en Guatemala.</p>
+        <div class="acciones">
+          <a class="boton boton-ambar" href="https://wa.me/50247465109" target="_blank" rel="noopener">Pedir una cotización</a>
+          <a class="boton boton-borde" href="#precios">Ver precios</a>
+        </div>
+      </div>
+      <div class="chat-marco">
+        <div data-chat-widget></div>
+        <p class="chat-nota">Este chat es el mismo asistente que instalamos en los negocios. <b>Pregúntale lo que quieras.</b></p>
+      </div>
+    </div>
+  </section>
+  <div class="capas" aria-hidden="true"></div>
+
+  <section id="servicios">
+    <div class="envoltura">
+      <h2>Lo que hacemos</h2>
+      <p class="intro">Tres líneas de trabajo para resolver lo que tu negocio necesita, sea una pieza que puedes tocar o un sistema que atiende a tus clientes.</p>
+      <div class="servicios">
+        <article class="servicio">
+          <h3>Impresión 3D a la medida</h3>
+          <p>Diseñamos e imprimimos piezas a partir de una foto, unas medidas o la pieza dañada.</p>
+          <ul><li>Repuestos que ya no se venden</li><li>Soportes y herramientas para tu trabajo</li><li>Prototipos de productos</li><li>PLA y PETG según el uso</li></ul>
+        </article>
+        <article class="servicio">
+          <h3>Asistentes de WhatsApp con IA</h3>
+          <p>Responden a tus clientes a cualquier hora con la información de tu negocio, y te pasan la conversación cuando hace falta.</p>
+          <ul><li>Precios, horarios y catálogo</li><li>Toma de pedidos y citas</li><li>También en Messenger, Instagram y tu web</li><li>El número queda a nombre de tu negocio</li></ul>
+        </article>
+        <article class="servicio">
+          <h3>Páginas web</h3>
+          <p>Tu negocio en internet, con dominio propio y un chat que atiende a tus visitantes como el de esta página.</p>
+          <ul><li>Diseño a la medida de tu marca</li><li>Botón directo a WhatsApp</li><li>Chat con IA integrado</li><li>Se ve bien en el celular</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="trabajos" id="trabajos">
+    <div class="envoltura">
+      <h2>Trabajos realizados</h2>
+      <p class="intro">Proyectos reales, hechos a la medida de cada cliente.</p>
+
+      <article class="caso">
+        <img src="assets/soporte.jpg" alt="Soporte rojo impreso en 3D para sostener una lata de refrigerante boca abajo" width="900" height="1100" loading="lazy">
+        <div>
+          <p class="etiqueta">Impresión 3D</p>
+          <h3>Soporte para lata de refrigerante</h3>
+          <p>Un técnico de aire acondicionado necesitaba sostener sus latas de refrigerante boca abajo para cargar equipos. Diseñamos el soporte a la medida de sus latas, con un asiento cónico que las centra y una abertura frontal para la válvula y la manguera.</p>
+          <ul class="datos">
+            <li><b>A la medida</b><span>Para latas de 7.4 a 7.7 cm</span></li>
+            <li><b>PETG</b><span>Resiste calor y golpes</span></li>
+            <li><b>Sin soportes</b><span>Diseño optimizado para imprimir</span></li>
+            <li><b>Pared de 5 mm</b><span>Firme para uso diario</span></li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="caso invertido">
+        <div>
+          <p class="etiqueta">Asistente virtual</p>
+          <h3>Atención automática para una institución pública</h3>
+          <p>Recibían todos los días las mismas consultas sobre servicios, tarifas y a quién contactar. Implementamos un asistente que responde las 24 horas en WhatsApp y en su sitio web.</p>
+          <ul class="datos">
+            <li><b>Atención 24/7</b><span>En WhatsApp y en la web</span></li>
+            <li><b>Tarifas oficiales</b><span>Más de 60, sin inventar precios</span></li>
+            <li><b>Deriva casos</b><span>Al laboratorio que corresponde</span></li>
+            <li><b>Mejora continua</b><span>Registro y encuesta de satisfacción</span></li>
+          </ul>
+        </div>
+        <div class="conversacion" aria-label="Ejemplo de conversación con el asistente">
+          <div class="burbuja cliente">Hola, ¿qué servicios ofrecen?</div>
+          <div class="burbuja bot">¡Hola! Tenemos 15 áreas de servicio con tarifa oficial. ¿Qué equipo necesita calibrar?</div>
+          <div class="burbuja cliente">Una balanza</div>
+          <div class="burbuja bot">Le comparto la tarifa y el contacto del laboratorio responsable.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="proceso">
+    <div class="envoltura">
+      <h2>Cómo trabajamos</h2>
+      <p class="intro">Sin vueltas: nos cuentas qué necesitas y te decimos cuánto cuesta y cuánto tarda.</p>
+      <ol class="pasos">
+        <li><h3>Nos escribes</h3><p>Por WhatsApp, Instagram, Messenger o este chat. Para piezas, una foto y las medidas ayudan mucho.</p></li>
+        <li><h3>Te cotizamos</h3><p>Revisamos tu caso y te confirmamos el precio exacto y el tiempo de entrega por el mismo chat.</p></li>
+        <li><h3>Lo armamos</h3><p>Imprimimos tu pieza o configuramos tu asistente o tu página, y te acompañamos después de la entrega.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="precios" id="precios">
+    <div class="envoltura">
+      <h2>Precios</h2>
+      <p class="intro">Precios de referencia. Cada proyecto se confirma con una cotización según tus necesidades.</p>
+      <div class="tablas">
+        <div class="tabla">
+          <h3>Impresión 3D</h3>
+          <table>
+            <tr><td>Pieza pequeña<small>Hasta unos 10 cm</small></td><td>desde Q50</td></tr>
+            <tr><td>Pieza mediana<small>De 10 a 20 cm</small></td><td>desde Q100</td></tr>
+            <tr><td>Diseño o modelado 3D<small>A partir de foto, medidas o pieza dañada</small></td><td>desde Q75</td></tr>
+          </table>
+        </div>
+        <div class="tabla">
+          <h3>Servicios digitales</h3>
+          <table>
+            <tr><td>Web Presencia<small>Página web, dominio y botón de WhatsApp</small></td><td>Q3,500<small>+ Q200 al mes</small></td></tr>
+            <tr><td>Bot Atiende<small>Asistente de WhatsApp con IA</small></td><td>Q3,000<small>+ Q600 al mes</small></td></tr>
+            <tr><td>Combo Digital<small>Página web con chat y asistente de WhatsApp</small></td><td>Q6,000<small>+ Q750 al mes</small></td></tr>
+          </table>
+        </div>
+      </div>
+      <p class="nota-precios">Los servicios digitales tienen un pago de instalación y una mensualidad de mantenimiento. Pagos por transferencia, depósito o efectivo contra entrega; para servicios digitales, 50% de anticipo y 50% al entregar.</p>
+    </div>
+  </section>
+
+  <section class="contacto" id="contacto">
+    <div class="envoltura">
+      <h2>¿Tienes una idea? Nosotros la armamos.</h2>
+      <p class="intro">Escríbenos por el canal que prefieras. Te responde nuestro asistente al instante y Aldair te da seguimiento personal.</p>
+      <div class="canales">
+        <a class="boton boton-ambar" href="https://wa.me/50247465109" target="_blank" rel="noopener">WhatsApp 4746-5109</a>
+        <a class="boton boton-navy" href="https://instagram.com/kubolab.gt" target="_blank" rel="noopener">Instagram</a>
+        <a class="boton boton-navy" href="https://m.me/1368334506356895" target="_blank" rel="noopener">Messenger</a>
+        <a class="boton boton-claro" href="mailto:kubolab.gt@gmail.com">kubolab.gt@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="envoltura">
+    <span>Kubo Lab, Ciudad de Guatemala</span>
+    <div class="derecha">
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="eliminacion-datos.html">Eliminación de datos</a>
+    </div>
+  </div>
+</footer>
+
+<!-- Chat conectado al mismo asistente de WhatsApp, Messenger e Instagram -->
+<script src="https://whatsapp-bot-mz1l.onrender.com/widget.js" defer
+        data-titulo="Asistente de Kubo Lab"
+        data-subtitulo="Responde al instante, las 24 horas"
+        data-saludo="¡Hola! 👋 Soy el asistente de Kubo Lab. Pregúntame por impresión 3D, chatbots o páginas web."
+        data-color="#14B8A6"
+        data-fondo="#0E1A2B"
+        data-sugerencias="¿Cuánto cuesta un chatbot?|Necesito imprimir una pieza|¿Hacen páginas web?"></script>
+</body>
+</html>
